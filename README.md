@@ -1,84 +1,28 @@
-# twen-twen-tw.el
+# twen-twen-tw.el 👁️
 
-An Emacs package that implements the 20/20/20 rule to reduce eye strain: every 20 minutes, look at something 20 feet away for 20 seconds.
+*A package to protect your health during long Emacs sessions.*
 
-## Features
+[The 20/20/20 rule](https://www.nvisioncenters.com/education/20-20-20-rule/): every 20 minutes, look at something 20 feet away for 20 seconds. This package makes you do it. 
 
-- Configurable reminder intervals (default: 20 minutes)
-- Beautiful popup notifications using posframe
-- 20-second countdown timer with visual feedback
-- Snooze functionality (default: 5 minutes)
-- Customizable break duration
-- Easy start/stop/toggle commands
+## Quick Start
 
-## Requirements
+TODO
 
-- Emacs 25.1+
-- `posframe` package (for popup notifications)
+## Commands That Matter
 
-## Installation
+- `twen-twen-tw-toggle` - Turn the eye police on/off
+- `twen-twen-tw-test-reminder` - See what you're in for
 
-1. Install the `posframe` package (available on MELPA):
-   ```elisp
-   M-x package-install RET posframe RET
-   ```
+When the popup appears: `s` to take a break, `z` to snooze, `q` to ignore medical advice.
 
-2. Add this package to your load path and require it:
-   ```elisp
-   (add-to-list 'load-path "/path/to/twen-twen-tw.el")
-   (require 'twen-twen-tw)
-   ```
-
-## Usage
-
-### Basic Commands
-
-- `M-x twen-twen-tw-start` - Start the reminder system
-- `M-x twen-twen-tw-stop` - Stop the reminder system  
-- `M-x twen-twen-tw-toggle` - Toggle the system on/off
-- `M-x twen-twen-tw-test-reminder` - Show a test reminder immediately
-
-### Minor Mode
-
-Enable the minor mode for automatic startup:
+## Customization for the Obsessive
 
 ```elisp
-(twen-twen-tw-mode 1)
+(setq twen-twen-tw-interval (* 15 60))        ; Nag every 15 minutes instead
+(setq twen-twen-tw-break-duration 30)         ; Stare into the distance for 30 seconds
+(setq twen-twen-tw-snooze-duration (* 2 60))  ; Snooze for 2 minutes (rebel!)
 ```
 
-### Popup Controls
+**Important Medical Disclaimer:** Since this package only reminds users within Emacs, it is highly recommended that users with an interest in preserving the health of their eyes never leave Emacs under any circumstances.
 
-When a reminder popup appears:
-- Press `s` to start the 20-second break
-- Press `z` to snooze for 5 minutes
-- Press `q` to dismiss and schedule next reminder
-
-## Configuration
-
-Customize the behavior with these variables:
-
-```elisp
-;; Reminder interval (default: 20 minutes)
-(setq twen-twen-tw-interval (* 30 60)) ; 30 minutes
-
-;; Break duration (default: 20 seconds)  
-(setq twen-twen-tw-break-duration 30) ; 30 seconds
-
-;; Snooze duration (default: 5 minutes)
-(setq twen-twen-tw-snooze-duration (* 10 60)) ; 10 minutes
-```
-
-Or use the customization interface:
-```elisp
-M-x customize-group RET twen-twen-tw RET
-```
-
-## The 20/20/20 Rule
-
-The 20/20/20 rule is recommended by eye care professionals to reduce digital eye strain:
-
-- Every **20 minutes**
-- Look at something **20 feet away**  
-- For at least **20 seconds**
-
-This helps relax the focusing muscles in your eyes and reduce fatigue from prolonged screen use.
+*P.S. I am not a doctor and this is not real medical advice, though I do think it's a good idea.*
