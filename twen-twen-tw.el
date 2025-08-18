@@ -56,9 +56,8 @@
 (defconst twen-twen-tw--popup-buffer "*twen-twen-tw-popup*")
 
 (defface twen-twen-tw-popup-face
-  '((t :background "#2d3748"
-       :foreground "#e2e8f0"
-       :box (:line-width 2 :color "#4299e1")
+  '((t :inherit default
+       :background unspecified
        :height 1.2))
   "Face for the 20/20/20 popup."
   :group 'twen-twen-tw)
@@ -67,7 +66,8 @@
   '((t :inherit twen-twen-tw-popup-face
        :weight bold
        :height 1.5
-       :foreground "#63b3ed"))
+       :foreground blue
+       :background unspecified))
   "Face for the popup title."
   :group 'twen-twen-tw)
 
@@ -75,23 +75,22 @@
   '((t :inherit twen-twen-tw-popup-face
        :weight bold
        :height 2.0
-       :foreground "#48bb78"))
+       :foreground green
+       :background unspecified))
   "Face for the countdown display."
   :group 'twen-twen-tw)
 
 (defun twen-twen-tw--create-popup-content (message &optional countdown)
   "Create popup content with MESSAGE and optional COUNTDOWN."
   (with-temp-buffer
-    (insert (propertize "👁️ 20/20/20 Rule Reminder\n\n" 'face 'twen-twen-tw-title-face))
-    (insert (propertize message 'face 'twen-twen-tw-popup-face))
+    (insert "👁️ 20/20/20 Rule Reminder\n\n")
+    (insert message)
     (when countdown
       (insert "\n\n")
-      (insert (propertize (format "Time remaining: %02d seconds" countdown)
-                          'face 'twen-twen-tw-countdown-face)))
+      (insert (format "Time remaining: %02d seconds" countdown)))
     (unless countdown
       (insert "\n\n")
-      (insert (propertize "Press 's' to start break, 'z' to snooze, 'q' to dismiss"
-                          'face 'twen-twen-tw-popup-face)))
+      (insert "Press 's' to start break, 'z' to snooze, 'q' to dismiss"))
     (buffer-string)))
 
 (defun twen-twen-tw--show-popup (content)
@@ -108,10 +107,10 @@
                  :string content
                  :position (cons (/ (frame-width) 2) (/ (frame-height) 3))
                  :poshandler #'posframe-poshandler-frame-center
-                 :background-color "#2d3748"
-                 :foreground-color "#e2e8f0"
+                 :background-color (face-background 'mode-line nil t)
+                 :foreground-color (face-foreground 'mode-line nil t)
                  :border-width 2
-                 :border-color "#4299e1"
+                 :border-color (face-foreground 'mode-line nil t)
                  :internal-border-width 10
                  :min-width 50
                  :min-height 10))
