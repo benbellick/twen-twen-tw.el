@@ -196,7 +196,9 @@
 
 (defun twen-twen-tw--popup-event-handler ()
   "Handle events when popup is shown."
-  (let ((key (read-key "Press 's' to start break, 'z' to snooze, 'q' to dismiss: ")))
+  (let (key)
+    (while (not (memq (setq key (read-key "Press 's' to start break, 'z' to snooze, 'q' to dismiss: ")) '(?s ?z ?q)))
+      (message "Invalid key. Press 's' to start break, 'z' to snooze, 'q' to dismiss."))
     (twen-twen-tw--handle-popup-key key)))
 
 (defun twen-twen-tw--cleanup-timers ()
