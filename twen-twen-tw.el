@@ -80,15 +80,15 @@
   "Face for the countdown display."
   :group 'twen-twen-tw)
 
-(defun twen-twen-tw--create-popup-content (message &optional countdown)
-  "Create popup content with MESSAGE and optional COUNTDOWN."
+(defun twen-twen-tw--create-popup-content (message &optional countdown no-keys)
+  "Create popup content with MESSAGE and optional COUNTDOWN. If NO-KEYS is non-nil, don't show key instructions."
   (with-temp-buffer
     (insert "👁️ 20/20/20 Rule Reminder\n\n")
     (insert message)
-    (when countdown
+    (when (numberp countdown)
       (insert "\n\n")
       (insert (format "Time remaining: %02d seconds" countdown)))
-    (unless countdown
+    (unless (or (numberp countdown) no-keys)
       (insert "\n\n")
       (insert "Press 's' to start break, 'z' to snooze, 'q' to dismiss"))
     (buffer-string)))
@@ -155,7 +155,7 @@
   
   (twen-twen-tw--show-popup
    (twen-twen-tw--create-popup-content
-    "Break complete! 🎉\n\nYour eyes should feel more refreshed.\nNext reminder in 20 minutes."))
+    "Break complete! 🎉\n\nYour eyes should feel more refreshed.\nNext reminder in 20 minutes." nil t))
   
   (run-at-time 3 nil 'twen-twen-tw--hide-popup)
   (twen-twen-tw--schedule-next-reminder))
