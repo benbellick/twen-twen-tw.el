@@ -66,7 +66,7 @@
   '((t :inherit twen-twen-tw-popup-face
        :weight bold
        :height 1.5
-       :foreground blue
+       :foreground "blue"
        :background unspecified))
   "Face for the popup title."
   :group 'twen-twen-tw)
@@ -75,7 +75,7 @@
   '((t :inherit twen-twen-tw-popup-face
        :weight bold
        :height 2.0
-       :foreground green
+       :foreground "green"
        :background unspecified))
   "Face for the countdown display."
   :group 'twen-twen-tw)
