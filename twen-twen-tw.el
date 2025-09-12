@@ -2,11 +2,11 @@
 
 ;; Copyright (C) 2025
 
-;; Author: Your Name
+;; Author: Ben Bellick (benbellick)
 ;; Version: 1.0.0
 ;; Package-Requires: ((emacs "25.1") (posframe "1.0"))
 ;; Keywords: health, ergonomics, reminder
-;; URL: 
+;; URL: https://github.com/benbellick/twen-twen-tw.el
 
 ;;; Commentary:
 
