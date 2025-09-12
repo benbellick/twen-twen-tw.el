@@ -165,7 +165,8 @@
   (unless twen-twen-tw--break-active
     (twen-twen-tw--show-popup
      (twen-twen-tw--create-popup-content
-      "Time for a 20/20/20 break!\n\nLook at something 20 feet away for 20 seconds to reduce eye strain."))))
+      "Time for a 20/20/20 break!\n\nLook at something 20 feet away for 20 seconds to reduce eye strain."))
+    (run-at-time 0.1 nil 'twen-twen-tw--popup-event-handler)))
 
 (defun twen-twen-tw--schedule-next-reminder ()
   "Schedule the next reminder."
