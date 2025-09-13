@@ -161,12 +161,15 @@
   (twen-twen-tw--schedule-next-reminder))
 
 (defun twen-twen-tw--show-reminder ()
-  "Show the main reminder popup."
+  "Show the main reminder popup and prompt in minibuffer."
   (unless twen-twen-tw--break-active
     (twen-twen-tw--show-popup
      (twen-twen-tw--create-popup-content
       "Time for a 20/20/20 break!\n\nLook at something 20 feet away for 20 seconds to reduce eye strain."))
-    (run-at-time 0.1 nil 'twen-twen-tw--popup-event-handler)))
+    (let ((choice (read-char-choice 
+                   "[s] Start break  [z] Snooze (5 min)  [q] Dismiss: "
+                   '(?s ?z ?q))))
+      (twen-twen-tw--handle-popup-key choice))))
 
 (defun twen-twen-tw--schedule-next-reminder ()
   "Schedule the next reminder."
@@ -244,8 +247,7 @@
 (defun twen-twen-tw-test-reminder ()
   "Show a test reminder immediately."
   (interactive)
-  (twen-twen-tw--show-reminder)
-  (run-at-time 0.1 nil 'twen-twen-tw--popup-event-handler))
+  (twen-twen-tw--show-reminder))
 
 ;;;###autoload
 (define-minor-mode twen-twen-tw-mode
