@@ -38,6 +38,11 @@
   :type 'integer
   :group 'twen-twen-tw)
 
+(defcustom twen-twen-tw-ring-bell t
+  "Whether to ring the bell when showing reminders."
+  :type 'boolean
+  :group 'twen-twen-tw)
+
 (defvar twen-twen-tw--timer nil
   "Timer object for the main reminder.")
 
@@ -163,6 +168,8 @@
 (defun twen-twen-tw--show-reminder ()
   "Show the main reminder popup and prompt in minibuffer."
   (unless twen-twen-tw--break-active
+    (when twen-twen-tw-ring-bell
+      (ding))
     (twen-twen-tw--show-popup
      (twen-twen-tw--create-popup-content
       "Time for a 20/20/20 break!\n\nLook at something 20 feet away for 20 seconds to reduce eye strain."))
