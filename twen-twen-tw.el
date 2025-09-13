@@ -23,8 +23,8 @@
   :group 'health
   :prefix "twen-twen-tw-")
 
-(defcustom twen-twen-tw-interval (* 20 60)
-  "Interval in seconds between reminders (default: 20 minutes)."
+(defcustom twen-twen-tw-interval 20
+  "Interval in minutes between reminders (default: 20 minutes)."
   :type 'integer
   :group 'twen-twen-tw)
 
@@ -33,8 +33,8 @@
   :type 'integer
   :group 'twen-twen-tw)
 
-(defcustom twen-twen-tw-snooze-duration (* 5 60)
-  "Snooze duration in seconds (default: 5 minutes)."
+(defcustom twen-twen-tw-snooze-duration 5
+  "Snooze duration in minutes (default: 5 minutes)."
   :type 'integer
   :group 'twen-twen-tw)
 
@@ -174,7 +174,7 @@
      (twen-twen-tw--create-popup-content
       "Time for a 20/20/20 break!\n\nLook at something 20 feet away for 20 seconds to reduce eye strain."))
     (let ((choice (read-char-choice 
-                   "[s] Start break  [z] Snooze (5 min)  [q] Dismiss: "
+                   (format "[s] Start break  [z] Snooze (%d min)  [q] Dismiss: " twen-twen-tw-snooze-duration)
                    '(?s ?z ?q))))
       (twen-twen-tw--handle-popup-key choice))))
 
@@ -183,7 +183,7 @@
   (when twen-twen-tw--timer
     (cancel-timer twen-twen-tw--timer))
   (setq twen-twen-tw--timer
-        (run-at-time twen-twen-tw-interval nil 'twen-twen-tw--show-reminder)))
+        (run-at-time (* twen-twen-tw-interval 60) nil 'twen-twen-tw--show-reminder)))
 
 (defun twen-twen-tw--snooze ()
   "Snooze the reminder."
@@ -191,8 +191,8 @@
   (when twen-twen-tw--timer
     (cancel-timer twen-twen-tw--timer))
   (setq twen-twen-tw--timer
-        (run-at-time twen-twen-tw-snooze-duration nil 'twen-twen-tw--show-reminder))
-  (message "20/20/20 reminder snoozed for %d minutes" (/ twen-twen-tw-snooze-duration 60)))
+        (run-at-time (* twen-twen-tw-snooze-duration 60) nil 'twen-twen-tw--show-reminder))
+  (message "20/20/20 reminder snoozed for %d minutes" twen-twen-tw-snooze-duration))
 
 (defun twen-twen-tw--handle-popup-key (key)
   "Handle key press KEY in popup."
@@ -230,7 +230,7 @@
   
   (setq twen-twen-tw--active t)
   (twen-twen-tw--schedule-next-reminder)
-  (message "20/20/20 reminder started! Next reminder in %d minutes." (/ twen-twen-tw-interval 60)))
+  (message "20/20/20 reminder started! Next reminder in %d minutes." twen-twen-tw-interval))
 
 ;;;###autoload
 (defun twen-twen-tw-stop ()
